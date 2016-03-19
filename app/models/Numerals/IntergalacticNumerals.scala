@@ -10,10 +10,17 @@ object IntergalacticNumerals {
 
   }
 
-  def addSymbol(symbolName: String, romanSymbol : RomanNumerals.Symbol) : Unit = {
+  def addSymbol(symbolName: String, romanSymbol : RomanNumerals.Symbol) : String = {
     val symbol = Symbol(symbolName, romanSymbol)
     if(!symbols.contains(symbol))
       symbols.add(symbol)
+    "Added symbol: " + symbolName
+  }
+
+  def addSymbol(symbol : IntergalacticNumerals.Symbol) : String = {
+    if(!symbols.contains(symbol))
+      symbols.add(symbol)
+    "Added symbol: " + symbol.name
   }
 
   def getSymbol(symbolName: String) : Symbol = {
@@ -23,5 +30,14 @@ object IntergalacticNumerals {
   def valueOf(symbolCombo : String) : Int = {
     val temp = symbolCombo.split(" ").map(symbol => getSymbol(symbol).romanSymbol).toList
     RomanNumerals.valueOf(temp)
+  }
+
+  def valueOf(symbolCombo: List[String]) : Int = {
+    val temp = symbolCombo.map(symbol => getSymbol(symbol).romanSymbol)
+    RomanNumerals.valueOf(temp)
+  }
+
+  def isValidSymbolName(name : String) : Boolean = {
+    symbols.map(s => s.name).contains(name)
   }
 }
