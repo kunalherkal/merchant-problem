@@ -1,20 +1,15 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@(inputQuery: Form[InputForm], response: String)(implicit messages: Messages)
 
-@*
- * Call the the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
+@import helper._
+
 @main("Welcome to Play") {
+ <script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+  @form(routes.InputController.submitInput()) {
+   @inputText(inputQuery("Enter your query"))
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Scala")
-
+  <div class="buttons">
+   <input type="submit" value="Add Input"/>
+  </div>
+    @response
+ }
 }
