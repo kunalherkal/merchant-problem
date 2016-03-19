@@ -33,12 +33,15 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
       InputForm => {
         println("Got Input query: " + InputForm)
         val input = Input.get(InputForm.text)
+        println(input)
         val outcome = input.process
-
+println(outcome)
         val response: String = outcome match {
           case a : Int => a.toString
+          case e : Double => e.toString
           case b : String => b
           case c : IntergalacticNumerals.Symbol => IntergalacticNumerals.addSymbol(c)
+          case d : IntergalacticNumerals.Credit => IntergalacticNumerals.addCredit(d)
         }
         Redirect(routes.InputController.sample(response))
       }

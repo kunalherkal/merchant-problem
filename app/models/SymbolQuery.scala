@@ -13,7 +13,7 @@ case class SymbolQuery(text : String) extends Input {
 
   override def process: Any = {
     if (!isValid) return "Invalid Input"
-    val symbolString: List[String] = text.split(" ").filter(s => IntergalacticNumerals.isValidSymbolName(s)).toList
+    val symbolString: List[String] = text.filter(s => s != '?').split(" ").filter(s => IntergalacticNumerals.isValidSymbolName(s)).toList
     IntergalacticNumerals.valueOf(symbolString)
   }
 

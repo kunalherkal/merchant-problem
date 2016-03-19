@@ -5,10 +5,11 @@ package models.Numerals
   */
 object IntergalacticNumerals {
   val symbols : scala.collection.mutable.Set[Symbol] = scala.collection.mutable.Set.empty
+  val credits : scala.collection.mutable.Set[Credit] = scala.collection.mutable.Set.empty
 
-  sealed case class Symbol(name : String, romanSymbol: RomanNumerals.Symbol) {
+  sealed case class Symbol(name : String, romanSymbol: RomanNumerals.Symbol)
 
-  }
+  sealed case class Credit(name: String, value : Double)
 
   def addSymbol(symbolName: String, romanSymbol : RomanNumerals.Symbol) : String = {
     val symbol = Symbol(symbolName, romanSymbol)
@@ -23,7 +24,7 @@ object IntergalacticNumerals {
     "Added symbol: " + symbol.name
   }
 
-  def getSymbol(symbolName: String) : Symbol = {
+  private def getSymbol(symbolName: String) : Symbol = {
     symbols.find(s => s.name == symbolName).get
   }
 
@@ -39,5 +40,25 @@ object IntergalacticNumerals {
 
   def isValidSymbolName(name : String) : Boolean = {
     symbols.map(s => s.name).contains(name)
+  }
+
+  def addCredit(credit : IntergalacticNumerals.Credit) : String = {
+    if(!credits.contains(credit))
+      credits.add(credit)
+    "Added credit: " + credit.name + " with value: " + credit.value
+  }
+
+  def isValidCreditName(name: String) : Boolean = {
+    credits.map(s => s.name).contains(name)
+  }
+
+  def getCredit(name: String) : Credit = {
+    println(name)
+    credits.find(s => s.name == name).get
+  }
+
+  def valueOfCredit(name : String, symbolValue: List[String]) : Double = {
+    val credit = IntergalacticNumerals.getCredit(name)
+    valueOf(symbolValue) * credit.value
   }
 }

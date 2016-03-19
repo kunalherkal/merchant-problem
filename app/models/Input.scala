@@ -13,8 +13,13 @@ abstract class Input {
 }
 
 object Input {
-  def get(text: String): Input = {
-    if (text.contains("?")) SymbolQuery(text) else SymbolInformation(text)
+  def get(inputText: String): Input = {
+    val text = inputText.toLowerCase
+    if (text.contains("?")){
+      if(text.contains("credit")) CreditQuery(inputText) else SymbolQuery(inputText)
+    }  else {
+      if(text.contains("credit")) CreditInformation(inputText) else SymbolInformation(inputText)
+    }
   }
 }
 
