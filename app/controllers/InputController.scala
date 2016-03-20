@@ -16,7 +16,7 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
 
   val inputForm: Form[InputForm] = Form {
     mapping(
-      "Enter your query" -> nonEmptyText
+      "input" -> nonEmptyText
     )(InputForm.apply)(InputForm.unapply)
   }
 
@@ -35,7 +35,6 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
         val input = Input.get(InputForm.text)
         println(input)
         val outcome = input.process
-println(outcome)
         val response: String = outcome match {
           case a : Int => a.toString
           case e : Double => e.toString

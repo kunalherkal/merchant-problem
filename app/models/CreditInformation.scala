@@ -17,16 +17,17 @@ case class CreditInformation(text : String) extends Input {
     remainingQuery.foreach(println)
     println(IntergalacticNumerals.validSymbolCombo(symbolList))
 
-    (splitInfo.size > 4 && remainingQuery.length == 4
+    (splitInfo.size > 4
+      && remainingQuery.length == 4
       && symbolList.size == splitInfo.length - 4
-      && !IntergalacticNumerals.isValidCreditName(remainingQuery(0))
-      && remainingQuery(1) == "is"
+      && !IntergalacticNumerals.creditPresent(remainingQuery(0))
+      && remainingQuery(1).toLowerCase == "is"
       && remainingQuery(3).toLowerCase == "credits"
       && IntergalacticNumerals.validSymbolCombo(symbolList))
   }
 
   override def process: Any = {
-    if (!isValid) return "Invalid Input"
+    if (!isValid) return "I have no idea what you are talking about"
     val splitQuery = text.split(" ").filter(s => !IntergalacticNumerals.symbolPresent(s))
 
     val symbolString: List[String] = text.split(" ").filter(s => IntergalacticNumerals.symbolPresent(s)).toList

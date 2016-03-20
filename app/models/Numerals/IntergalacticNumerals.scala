@@ -11,13 +11,6 @@ object IntergalacticNumerals {
 
   sealed case class Credit(name: String, value : Double)
 
-  def addSymbol(symbolName: String, romanSymbol : RomanNumerals.Symbol) : String = {
-    val symbol = Symbol(symbolName, romanSymbol)
-    if(!symbols.contains(symbol))
-      symbols.add(symbol)
-    "Added symbol: " + symbolName
-  }
-
   def addSymbol(symbol : IntergalacticNumerals.Symbol) : String = {
     if(!symbols.contains(symbol))
       symbols.add(symbol)
@@ -48,7 +41,7 @@ object IntergalacticNumerals {
     "Added credit: " + credit.name + " with value: " + credit.value
   }
 
-  def isValidCreditName(name: String) : Boolean = {
+  def creditPresent(name: String) : Boolean = {
     credits.map(s => s.name).contains(name)
   }
 
