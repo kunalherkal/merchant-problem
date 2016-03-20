@@ -57,9 +57,10 @@ object RomanNumerals {
     loop(symbolValues)
   }
 
-  def symbolRepetitions(symbols: List[RomanNumerals.Symbol]): List[(Symbol, Int)] = {
-    var tupleList : List[(RomanNumerals.Symbol, Int)] = List.empty
-    var tuple : (RomanNumerals.Symbol, Int) = (symbols.head, 0)
+  def symbolRepetitions(symbols: List[Symbol]): List[(Symbol, Int)] = {
+    var tupleList : List[(Symbol, Int)] = List.empty
+    var tuple : (Symbol, Int) = (symbols.head, 0)
+
     symbols.foreach(s => {
       if(s.name == tuple._1.name) tuple = (s, tuple._2 + 1)
       else {
@@ -67,7 +68,9 @@ object RomanNumerals {
         tuple = (s, 1)
       }
     })
+
     tupleList = tupleList ++ List(tuple)
+
     tupleList
   }
 
