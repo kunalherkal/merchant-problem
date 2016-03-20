@@ -8,7 +8,12 @@ import models.Numerals.{IntergalacticNumerals, RomanNumerals}
 case class SymbolInformation(text : String) extends Input {
 
   override def isValid: Boolean = {
-    true
+    val splitInfo = text.split(" ")
+    val infoLength = splitInfo.length
+    (infoLength == 3
+      && splitInfo(1) == "is"
+      && RomanNumerals.validSymbolName(splitInfo(2))
+      && !IntergalacticNumerals.symbolPresent(splitInfo(0)))
   }
 
   override def process: Any = {

@@ -24,13 +24,13 @@ object IntergalacticNumerals {
     "Added symbol: " + symbol.name
   }
 
-  private def getSymbol(symbolName: String) : Symbol = {
-    symbols.find(s => s.name == symbolName).get
+  def validSymbolCombo(symbols : List[String]) : Boolean = {
+    val temp = symbols.map(symbol => getSymbol(symbol).romanSymbol)
+    RomanNumerals.isValidCombo(temp)
   }
 
-  def valueOf(symbolCombo : String) : Int = {
-    val temp = symbolCombo.split(" ").map(symbol => getSymbol(symbol).romanSymbol).toList
-    RomanNumerals.valueOf(temp)
+  private def getSymbol(symbolName: String) : Symbol = {
+    symbols.find(s => s.name == symbolName).get
   }
 
   def valueOf(symbolCombo: List[String]) : Int = {
@@ -38,7 +38,7 @@ object IntergalacticNumerals {
     RomanNumerals.valueOf(temp)
   }
 
-  def isValidSymbolName(name : String) : Boolean = {
+  def symbolPresent(name : String) : Boolean = {
     symbols.map(s => s.name).contains(name)
   }
 
@@ -53,7 +53,6 @@ object IntergalacticNumerals {
   }
 
   def getCredit(name: String) : Credit = {
-    println(name)
     credits.find(s => s.name == name).get
   }
 
