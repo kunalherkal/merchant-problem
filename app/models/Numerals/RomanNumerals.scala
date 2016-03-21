@@ -58,24 +58,24 @@ object RomanNumerals {
   }
 
   def symbolRepetitions(symbols: List[Symbol]): List[(Symbol, Int)] = {
-
-    def symbolRepetitions2(s: Symbol, r: Int, symbols: List[Symbol]): List[(Symbol, Int)] = (s, r, symbols) match {
-      case (a, b, head :: Nil) if a == head => List((a, b + 1))
-      case (a, b, head :: Nil) if a != head => List((a, b), (head, 1))
-      case (a, b, head :: tail) if a == head => symbolRepetitions2(a, b+1, tail)
-      case (a, b, head :: tail) if a != head => List((a, b)) ++ symbolRepetitions2(head, 1, tail)
-      case _ => throw new IllegalArgumentException
-    }
-
-    symbolRepetitions2(symbols.head, 0, symbols)
+    packDuplicatesAndCount(symbols)
   }
 
+  def packDuplicatesAndCount(list : List[Symbol]): List[(Symbol,Int)] = {
 
+    list match{
+      case Nil => Nil
+      case x :: tail =>{
+        val value = list.takeWhile{s => s == x}
+        (value.head, value.length) :: packDuplicatesAndCount(list.drop(value.length))
+      }
+    }
+  }
 
   def validOrder(tupleList: List[(Symbol, Int)]) : Boolean = tupleList match {
     case head :: Nil => true
-    case head :: tail if head._1.value > tail.head._1.value =>  true && validOrder(tail)
-    case head :: tail if validSubtraction(head, tail.head) =>  true && validOrder(tail)
+    case head :: tail if head._1.value > tail.head._1.value =>  validOrder(tail)
+    case head :: tail if validSubtraction(head, tail.head) =>  validOrder(tail)
     case _ => false
   }
 

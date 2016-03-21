@@ -32,13 +32,11 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
       },
       InputForm => {
         val input = Input.get(InputForm.text)
-        val outcome = input.process
+        val outcome: Any = input.process
         val response: String = outcome match {
-          case a : Int => a.toString
-          case e : Double => e.toString
-          case b : String => b
-          case c : IntergalacticNumerals.Symbol => IntergalacticNumerals.addSymbol(c)
-          case d : IntergalacticNumerals.Credit => IntergalacticNumerals.addCredit(d)
+          case a : String => a
+          case b : IntergalacticNumerals.Symbol => IntergalacticNumerals.addSymbol(b)
+          case c : IntergalacticNumerals.Credit => IntergalacticNumerals.addCredit(c)
         }
         Redirect(routes.InputController.sample(response))
       }

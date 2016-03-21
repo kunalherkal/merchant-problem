@@ -15,11 +15,14 @@ abstract class Input {
 object Input {
   def get(inputText: String): Input = {
     val text = inputText.toLowerCase
-    if (text.contains("?")){
-      if(text.contains("credit")) CreditQuery(inputText) else SymbolQuery(inputText)
-    }  else {
-      if(text.contains("credit")) CreditInformation(inputText) else SymbolInformation(inputText)
+
+    text match {
+      case a if a.contains("?") && a.contains("credit") => CreditQuery(inputText)
+      case b if b.contains("?") => SymbolQuery(inputText)
+      case c if c.contains("credit") => CreditInformation(inputText)
+      case _ => SymbolInformation(inputText)
     }
+
   }
 }
 

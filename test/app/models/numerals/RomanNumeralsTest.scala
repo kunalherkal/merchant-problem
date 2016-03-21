@@ -8,11 +8,10 @@ import org.scalatest.{Matchers, FlatSpec}
   */
 class RomanNumeralsTest extends FlatSpec with Matchers {
 
-  "SymbolRepetitions" should "return something" in {
+  "SymbolRepetitions" should "return list of tuples containing (Symbol, repetition count)" in {
     val symbolList = List(RomanNumerals.X, RomanNumerals.X, RomanNumerals.X, RomanNumerals.V, RomanNumerals.I, RomanNumerals.I)
 
     val response = RomanNumerals.symbolRepetitions(symbolList).toArray
-    response.foreach(println)
     val tuple1 = response(0)
     val tuple2 = response(1)
     val tuple3 = response(2)
@@ -25,6 +24,13 @@ class RomanNumeralsTest extends FlatSpec with Matchers {
 
     assert(tuple3._1 == RomanNumerals.I)
     assert(tuple3._2 == 2)
+  }
+
+  "SymbolRepetitions" should "return Nil" in {
+    val symbolList = List.empty[RomanNumerals.Symbol]
+
+    assert(symbolList == Nil)
+
   }
 
 }
