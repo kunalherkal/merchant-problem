@@ -1,6 +1,6 @@
 package models
 
-import models.Numerals.IntergalacticNumerals
+import models.numerals.IntergalacticNumerals
 
 /**
   * Created by khn3193 on 3/20/16.

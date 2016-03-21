@@ -1,4 +1,4 @@
-package models.Numerals
+package models.numerals
 
 /**
   * Created by Kunal Herkal on 3/18/16.
@@ -58,21 +58,19 @@ object RomanNumerals {
   }
 
   def symbolRepetitions(symbols: List[Symbol]): List[(Symbol, Int)] = {
-    var tupleList : List[(Symbol, Int)] = List.empty
-    var tuple : (Symbol, Int) = (symbols.head, 0)
 
-    symbols.foreach(s => {
-      if(s.name == tuple._1.name) tuple = (s, tuple._2 + 1)
-      else {
-        tupleList = tupleList ++ List(tuple)
-        tuple = (s, 1)
-      }
-    })
+    def symbolRepetitions2(s: Symbol, r: Int, symbols: List[Symbol]): List[(Symbol, Int)] = (s, r, symbols) match {
+      case (a, b, head :: Nil) if a == head => List((a, b + 1))
+      case (a, b, head :: Nil) if a != head => List((a, b), (head, 1))
+      case (a, b, head :: tail) if a == head => symbolRepetitions2(a, b+1, tail)
+      case (a, b, head :: tail) if a != head => List((a, b)) ++ symbolRepetitions2(head, 1, tail)
+      case _ => throw new IllegalArgumentException
+    }
 
-    tupleList = tupleList ++ List(tuple)
-
-    tupleList
+    symbolRepetitions2(symbols.head, 0, symbols)
   }
+
+
 
   def validOrder(tupleList: List[(Symbol, Int)]) : Boolean = tupleList match {
     case head :: Nil => true

@@ -1,8 +1,8 @@
 package controllers
 
 import com.google.inject.{Inject, Singleton}
-import models.{InputForm, Input}
-import models.Numerals.IntergalacticNumerals
+import models.Input
+import models.numerals.IntergalacticNumerals
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.i18n.{MessagesApi, I18nSupport}

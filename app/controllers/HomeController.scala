@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import models.Numerals.{IntergalacticNumerals, RomanNumerals}
+import models.numerals.{IntergalacticNumerals, RomanNumerals}
 import play.api._
 import play.api.mvc._
 

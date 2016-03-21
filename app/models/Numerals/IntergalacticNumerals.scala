@@ -1,4 +1,4 @@
-package models.Numerals
+package models.numerals
 
 /**
   * Created by Kunal Herkal on 3/18/16.

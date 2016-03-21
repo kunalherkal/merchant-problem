@@ -1,4 +1,4 @@
-package models
+package controllers
 
 /**
   * Created by Kunal Herkal on 3/21/16.

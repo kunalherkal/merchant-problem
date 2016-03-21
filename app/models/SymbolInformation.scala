@@ -1,6 +1,6 @@
 package models
 
-import models.Numerals.{IntergalacticNumerals, RomanNumerals}
+import models.numerals.{IntergalacticNumerals, RomanNumerals}
 
 /**
   * Created by khn3193 on 3/20/16.
