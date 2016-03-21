@@ -1,7 +1,7 @@
 package controllers
 
 import com.google.inject.{Inject, Singleton}
-import models.Input
+import models.{InputForm, Input}
 import models.Numerals.IntergalacticNumerals
 import play.api.data.Form
 import play.api.data.Forms._
@@ -31,9 +31,7 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
         Ok(views.html.index(errorForm, "Failed"))
       },
       InputForm => {
-        println("Got Input query: " + InputForm)
         val input = Input.get(InputForm.text)
-        println(input)
         val outcome = input.process
         val response: String = outcome match {
           case a : Int => a.toString
@@ -50,4 +48,3 @@ class InputController @Inject() (val messagesApi: MessagesApi) extends Controlle
 
 }
 
-case class InputForm(text : String)
