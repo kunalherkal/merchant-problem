@@ -4,17 +4,20 @@ package models.numerals
   * Created by Kunal Herkal on 3/18/16.
   */
 object IntergalacticNumerals {
-  val symbols : scala.collection.mutable.Set[Symbol] = scala.collection.mutable.Set.empty
-  val credits : scala.collection.mutable.Set[Credit] = scala.collection.mutable.Set.empty
+  private var symbols : Set[Symbol] = Set.empty
+  private var credits : Set[Credit] = Set.empty
 
   sealed case class Symbol(name : String, romanSymbol: RomanNumerals.Symbol)
 
   sealed case class Credit(name: String, value : Double)
 
   def addSymbol(symbol : IntergalacticNumerals.Symbol) : String = {
-    if(!symbols.contains(symbol))
-      symbols.add(symbol)
-    "Added symbol: " + symbol.name
+    if (!symbols.contains(symbol)) {
+      symbols = symbols + symbol
+      return "Added symbol: " + symbol.name
+    }
+    throw new IllegalArgumentException
+
   }
 
   def validSymbolCombo(symbols : List[String]) : Boolean = {
@@ -36,9 +39,11 @@ object IntergalacticNumerals {
   }
 
   def addCredit(credit : IntergalacticNumerals.Credit) : String = {
-    if(!credits.contains(credit))
-      credits.add(credit)
-    "Added credit: " + credit.name + " with value: " + credit.value
+    if(!credits.contains(credit)) {
+      credits = credits + credit
+      return "Added credit: " + credit.name + " with value: " + credit.value
+    }
+    throw new IllegalArgumentException
   }
 
   def creditPresent(name: String) : Boolean = {

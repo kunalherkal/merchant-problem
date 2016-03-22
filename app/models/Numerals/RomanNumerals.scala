@@ -22,11 +22,11 @@ object RomanNumerals {
   case object D extends Symbol("D", 500, false, List.empty)
   case object M extends Symbol("M", 1000, true, List.empty)
 
-  val symbols = Set(I, V, X, L, C, D, M)
+  private val symbols = Set(I, V, X, L, C, D, M)
 
   def getSymbol(symbolName : String) : Symbol = {
     if (!symbols.map(s => s.name).contains(symbolName))
-      throw new IllegalArgumentException("Wrong symbol name encountered!: " + symbolName)
+      throw new IllegalArgumentException("Wrong roman symbol name encountered!: " + symbolName)
 
     symbols.find(s => s.name == symbolName).get
   }
@@ -47,14 +47,14 @@ object RomanNumerals {
 
   private def calculateValue(symbolValues : List[Int]) : Int = {
 
-    def loop(symbolValues : List[Int]) : Int =  symbolValues match {
-      case a :: Nil => a
-      case head :: tail if head >= tail.head =>  head + loop(tail)
-      case head :: tail =>  - head + loop(tail)
-      case Nil => throw new IllegalArgumentException("Can not find value from empty list of symbols")
+    def loop(value: Int, symbolValues : List[Int]) : Int =  symbolValues match {
+      case a :: Nil => a + value
+      case head :: tail if head >= tail.head =>  loop(value + head, tail)
+      case head :: tail =>  loop(value - head, tail)
+      case Nil => throw new IllegalArgumentException("Cannot find value from empty list of symbols")
     }
 
-    loop(symbolValues)
+    loop(0, symbolValues)
   }
 
   def symbolRepetitions(symbols: List[Symbol]): List[(Symbol, Int)] = {

@@ -33,4 +33,29 @@ class RomanNumeralsTest extends FlatSpec with Matchers {
 
   }
 
+
+  "Value of" should " return 9" in {
+    val symbolList = List(RomanNumerals.I, RomanNumerals.X)
+
+    assert(RomanNumerals.valueOf(symbolList) == 9)
+  }
+
+  "Value of" should " return 19" in {
+    val symbolList = List(RomanNumerals.I, RomanNumerals.X, RomanNumerals.X)
+
+    assert(RomanNumerals.valueOf(symbolList) == 19)
+  }
+
+  "Value of" should " again return 19" in {
+    val symbolList = List(RomanNumerals.X, RomanNumerals.I, RomanNumerals.X)
+
+    assert(RomanNumerals.valueOf(symbolList) == 19)
+  }
+
+  "Value of" should " return 20" in {
+    val symbolList = List(RomanNumerals.X, RomanNumerals.X)
+
+    assert(RomanNumerals.valueOf(symbolList) == 20)
+  }
+
 }
